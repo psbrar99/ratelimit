@@ -28,14 +28,14 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@2b51285047da1547ffb1b2203d8be4c0af6b1f20 # v3.2.0
 
-      - name: build and push docker image
-        run: |
-          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          VERSION=master make docker_multiarch_push     # Push image tagged with "master"
-          make docker_multiarch_push                    # Push image tagged with git sha
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      # - name: build and push docker image
+      #   run: |
+      #     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      #     VERSION=master make docker_multiarch_push     # Push image tagged with "master"
+      #     make docker_multiarch_push                    # Push image tagged with git sha
+      #   env:
+      #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: build and push s docker image
         run: |
