@@ -149,7 +149,7 @@ docker_multiarch_push: docker_multiarch_image
 
 .PHONY: docker_multiarch_push_fips
 docker_multiarch_push_fips: 
-	docker buildx build -f Dockerfile.fips -t $(IMAGE):$(VERSION) --platform=linux/amd64 --push .
+	docker buildx build -f Dockerfile.fips -t $(IMAGE):$(VERSION)-fips --platform=linux/amd64 --push .
 
 .PHONY: integration_tests
 integration_tests:
