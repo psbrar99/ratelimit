@@ -1,6 +1,6 @@
 export GO111MODULE=on
 PROJECT = ratelimit
-REGISTRY ?= envoyproxy
+REGISTRY ?= prabhj
 IMAGE := $(REGISTRY)/$(PROJECT)
 INTEGRATION_IMAGE := $(REGISTRY)/$(PROJECT)_integration
 MODULE = github.com/envoyproxy/ratelimit

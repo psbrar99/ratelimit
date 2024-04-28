@@ -39,7 +39,7 @@ jobs:
 
       - name: build and push s docker image
         run: |
-          echo "$DOCKER" | docker login -u 'prabhj' --password-stdin
+          echo "$DOCKER" | docker login -u prabhj --password-stdin
           VERSION=master make docker_multiarch_push_fips     # Push image tagged with "master"
           make docker_multiarch_push_fips                    # Push image tagged with git sha
         env:
