@@ -80,6 +80,13 @@ compile:
 	go build -mod=readonly -o ./bin/ratelimit_client $(MODULE)/src/client_cmd
 	go build -mod=readonly -o ./bin/ratelimit_config_check $(MODULE)/src/config_check_cmd
 
+# .PHONY: compile-fips
+# compile:
+# 	mkdir -p ./bin
+# 	GOEXPERIMENT=boringcrypto CGO_ENABLED=1 go build -ldflags '-extldflags "-static" -s -w -linkmode=external' -mod=readonly -o ./bin/ratelimit $(MODULE)/src/service_cmd
+# 	GOEXPERIMENT=boringcrypto CGO_ENABLED=1 go build -ldflags '-extldflags "-static" -s -w -linkmode=external' -mod=readonly -o ./bin/ratelimit_client $(MODULE)/src/client_cmd
+# 	GOEXPERIMENT=boringcrypto CGO_ENABLED=1 go build -ldflags '-extldflags "-static" -s -w -linkmode=external' -mod=readonly -o ./bin/ratelimit_config_check $(MODULE)/src/config_check_cmd
+
 .PHONY: tests_unit
 tests_unit: compile
 	go test -race $(MODULE)/...
@@ -139,6 +146,10 @@ docker_multiarch_image: docker_tests
 .PHONY: docker_multiarch_push
 docker_multiarch_push: docker_multiarch_image
 	docker buildx build -t $(IMAGE):$(VERSION) --platform $(BUILDX_PLATFORMS) --push .
+
+.PHONY: docker_multiarch_push_fips
+docker_multiarch_push_fips: 
+	docker buildx build -f Dockerfile.fips -t $(IMAGE):$(VERSION) --platform=linux/amd64 --push .
 
 .PHONY: integration_tests
 integration_tests:
