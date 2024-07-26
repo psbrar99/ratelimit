@@ -41,12 +41,12 @@ jobs:
       #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-      # - name: build and push s docker image
-      #   run: |
-      #     echo "$DOCKER" | docker login -u prabhj --password-stdin
-      #     VERSION=master make docker_multiarch_push_fips     # Push image tagged with "master"
-      #     make docker_multiarch_push_fips                    # Push image tagged with git sha
-      #   env:
-      #     # DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      #     DOCKER: ${{ secrets.DOCKER }}         
+      - name: build and push s docker image
+        run: |
+          echo "$DOCKER" | docker login -u prabhj --password-stdin
+          VERSION=master make docker_multiarch_push_fips     # Push image tagged with "master"
+          make docker_multiarch_push_fips                    # Push image tagged with git sha
+        env:
+          # DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER: ${{ secrets.DOCKER }}         
 

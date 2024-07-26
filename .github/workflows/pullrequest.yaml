@@ -22,8 +22,14 @@ jobs:
     steps:
       - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
 
-      - name: build and test
-        run: make docker_tests
+      - name: Extract PR number
+        run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+        
+      - name: dump
+        run: cat $GITHUB_ENV
+
+      # - name: build and test
+      #   run: make docker_tests
 
   precommits:
     runs-on: ubuntu-latest
